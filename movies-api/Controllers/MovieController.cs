@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using movies_api.Models;
-using movies_api.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using movies_api.Interfaces.Services;
 
 namespace movies_api.Controllers
 {
@@ -10,15 +8,16 @@ namespace movies_api.Controllers
     public class MovieController : ControllerBase
     {
 
-        private readonly MovieService _movieService;
+        private readonly IMovieService _movieService;
 
-        public MovieController(MovieService movieService)
+        public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllMovies()
+        [Route(nameof(GetAll))]
+        public async Task<IActionResult> GetAll()
         {
             try
             {
